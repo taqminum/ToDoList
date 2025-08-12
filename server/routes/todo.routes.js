@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const todoController = require('../controllers/todo.controller');
+const authenticateToken = require('../middleware/auth.middleware.js'); 
+
+// 所有路由添加认证
+router.use(authenticateToken); 
 
 router.post('/', todoController.createTodo);
 router.get('/', todoController.getAllTodos);

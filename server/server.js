@@ -1,7 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./db');
+const sequelize = require('./db'); // 导入连接
+const { User, Todo } = require('./models/index'); // 从统一入口导入模型
+
+// 导入路由
 const todoRoutes = require('./routes/todo.routes');
+const authRoutes = require('./routes/auth.routes');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,19 +16,16 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// 数据库连接
-sequelize.sync()
-  .then(() => console.log('Database connected'))
-  .catch(err => console.error('Database connection error:', err));
-
-// 路由
+// 挂载路由
 app.use('/api/todos', todoRoutes);
+app.use('/api/auth', authRoutes);
 
-// 健康检查端点
+// 健康检查
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+// 启动服务器
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
