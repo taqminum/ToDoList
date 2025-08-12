@@ -6,6 +6,22 @@
     <!--<link rel="icon" type="image/svg+xml" href="/vite.svg" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>待办清单</title>
+  <!--这部分是为了解决页面被压缩在左侧，内嵌样式-->
+    <style>
+      body {
+        display: block !important;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+      }
+      #root {
+        width: 100% !important;
+        min-height: 100vh;
+      }
+      * {
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
